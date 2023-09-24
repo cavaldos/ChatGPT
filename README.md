@@ -1,6 +1,5 @@
 # Chat GPT clone
 
-
 ## Install
 
 - Clone repository
@@ -10,12 +9,10 @@
 ```
 
 ```shell
+
  npm install # pnpm install
 ```
-
-- Run server
 
 ```shell
  npm run dev # npm run dev
 ```
-
