@@ -1,11 +1,10 @@
 
-import { Configuration, OpenAIApi, ListModelsResponse } from "openai";
+import { Configuration, OpenAIApi} from "openai";
 
 export const checkApiKey = async (apiKey: string) => {
   try {
     const configuration = new Configuration({
       apiKey: apiKey,
-      basePath: "https://api.openai.com/v1", // Set the correct base URL for the OpenAI API
     
     });
     

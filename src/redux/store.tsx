@@ -1,5 +1,6 @@
 import countSlice from "./features/countSlice";
-
+import themeSlice from "./features/theme";
+import messageSlice from "./features/message";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import {
   persistStore,
@@ -19,7 +20,9 @@ const persistConfig = {
   whitelist: ["count"],
 };
 const rootReducer = combineReducers({
-    count: countSlice,
+  count: countSlice,
+  theme: themeSlice,
+  message: messageSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
