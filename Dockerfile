@@ -1,23 +1,23 @@
-# Sử dụng ảnh cơ sở có Node.js
-FROM node:19.9.0
+# Use Node.js 18 with Alpine Linux as the base image
+FROM node:18-alpine
 
-# Đặt thư mục làm thư mục làm việc trong container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Sao chép package.json và package-lock.json (nếu có) vào thư mục làm việc
+# Copy package.json and package-lock.json (if available) to the working directory
 COPY package*.json ./
 
-# Cài đặt các dependencies
+# Install dependencies
 RUN npm install
 
-# Sao chép tất cả các file trong thư mục hiện tại vào thư mục làm việc
+# Copy all files from the current directory to the working directory
 COPY . .
 
-# Build ứng dụng Vite
+# Build the application
 RUN npm run build
 
-# Khai báo cổng mà ứng dụng sẽ lắng nghe
+# Expose port 3000 for the application
 EXPOSE 3000
 
-# Chạy lệnh để khởi động ứng dụng Vite
+# Run the command to start the application
 CMD ["npm", "run", "serve"]

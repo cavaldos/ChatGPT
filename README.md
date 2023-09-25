@@ -35,7 +35,7 @@ docker run -dp 3000:3000  chat-gpt .
 
 ### Remove the old container
 
-1.Get the ID of the container by using the `docker ps ` command.
+1.Get the ID of the container by using the `docker ps` command.
 
 ```shell
 docker ps -a
