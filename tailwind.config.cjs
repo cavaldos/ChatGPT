@@ -6,6 +6,9 @@ module.exports = {
 
   theme: {
     extend: {
+      fontFamily: {
+        nunito: ["Nunito", "sans-serif", "ui-sans-serif", "system-ui"],
+      },
       colors: {
         "light-white": "#ffffff2b",
         "dark-grey": "#202123",
