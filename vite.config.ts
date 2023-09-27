@@ -6,7 +6,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "0.0.0.0", // default: 'localhost'
-
+    hmr: {
+      overlay: true,
+    },
   },
   preview: {
     port: 8080,
@@ -17,7 +19,6 @@ export default defineConfig({
         find: "~/",
         replacement: "/src/",
       },
-     
     ],
   },
 });
