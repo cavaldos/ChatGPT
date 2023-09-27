@@ -9,33 +9,34 @@ interface Message {
 
 export const messageSlice = createSlice({
   name: "message",
-  initialState: {
-    id: 1,
-    createdAt: Date.now(),
-    text: "**Hello!** *How can I help you today?*",
-    ai: true,
-  },
+  initialState: [
+    {
+      id: 1,
+      createdAt: Date.now(),
+      text: "**Hello!** *How can I help you today?*",
+      ai: true,
+    },
+    {
+      id: 2,
+      createdAt: Date.now(),
+      text: "Hello! How can I help you today?",
+      ai: false,
+    },
+  ],
   reducers: {
     addMessage: (state, action) => {
-      const newMessage: Message = {
-        id: state.id + 1,
-        createdAt: Date.now(),
-        text: action.payload,
-        ai: false,
-      };
-      state.id = newMessage.id;
-      state.createdAt = newMessage.createdAt;
-      state.text = newMessage.text;
-      state.ai = newMessage.ai;
+      state.push(action.payload);
     },
-    clearMessage: (state) => {
-      state.id = 1;
-      state.createdAt = Date.now();
-      state.text = "**Hello!** *How can I help you today?*";
-      state.ai = true;
+    updateMessage: (state, action) => {
+      const { id, text, ai } = action.payload;
+      const message = state.find((message) => message.id === id);
+      if (message) {
+        message.text = text;
+        message.ai = ai;
+      }
     },
   },
 });
+export const { addMessage, updateMessage } = messageSlice.actions;
 
-export const { addMessage, clearMessage } = messageSlice.actions;
 export default messageSlice.reducer;
