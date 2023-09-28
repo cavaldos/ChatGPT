@@ -1,5 +1,8 @@
 # Chat GPT clone
 
+![](/screenshot/1.png){: width="200px"}
+![](/screenshot/2.png){: width="200px"}
+![](/screenshot/3.png){: width="200px"}
 ## Install
 
 1. Clone repository

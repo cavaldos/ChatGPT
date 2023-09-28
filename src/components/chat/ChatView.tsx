@@ -5,15 +5,16 @@ import Filter from "bad-words";
 import { davinci } from "~/utils/davinci";
 import { useDispatch } from "react-redux";
 import { addMessage } from "~/redux/features/message";
-
+import { LazyThinkingMemo } from "~/components/Lazy";
+import InputLoading  from "~/components/Lazy/InputLoading";
 const ChatView: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [checkThinking, setCheckThinking] = useState(false); // 👈 Thêm state [checkThinking
   const [formValue, setFormValue] = useState("");
   const dispatch = useDispatch();
 
   const sendMessage = async (e: any) => {
     e.preventDefault();
-
     const key = import.meta.env.VITE_OPENAI_KEY;
     if (!key) {
       return;
@@ -23,20 +24,22 @@ const ChatView: React.FC = () => {
     const cleanPrompt = filter.isProfane(formValue)
       ? filter.clean(formValue)
       : formValue;
-
     const newMsg = cleanPrompt;
-    console.log("newMsg", newMsg);
+    await setCheckThinking(true);
     try {
       const response = await davinci(newMsg, import.meta.env.VITE_OPENAI_KEY);
-      console.log("response", response);
       const data = response.data.choices[0].message?.content;
-      console.log("data", data);
-      await dispatch(addMessage({ text: data, createdAt: Date.now(), ai: true }));
-
-      console.log("data", data);
+      data !== undefined && setCheckThinking(false);
+      await dispatch(
+        addMessage({ text: data, createdAt: Date.now(), ai: true })
+      );
     } catch (error) {
       dispatch(
-        addMessage({ text: "hello con cac, loading", createdAt: Date.now(), ai: true })
+        addMessage({
+          text: "hello con cac, loading",
+          createdAt: Date.now(),
+          ai: true,
+        })
       );
       console.log("error", error);
     }
@@ -62,6 +65,8 @@ const ChatView: React.FC = () => {
     <>
       <div className=" min-h-[80vh] w-screen mx-auto px-[15vw]  rounded-md content-center pb-40	">
         <ChatMessage />
+        {checkThinking === true ? <LazyThinkingMemo /> : <></>}
+        {formValue !== "" ? <InputLoading /> : <></>}
       </div>
       <div className="flex items-center inset-0  w-[70vw] mx-auto bg-[#1F1E1F] rounded-md  justify-center fixed h-[52px] top-[88vh] font-nunito	 ">
         <textarea

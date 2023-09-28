@@ -9,7 +9,6 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 
 const AiChat: React.FC<{ message: Message }> = ({ message }) => {
-  console.log("message", message);
   return (
     <div className="flex my-2 gap-2">
       <div className="w-[40px] h-[40px] bg-black">
@@ -19,7 +18,7 @@ const AiChat: React.FC<{ message: Message }> = ({ message }) => {
           className="w-[40px] h-[40px] rounded-tl-lg rounded-tr-lg rounded-bl-lg"
         />
       </div>
-      <div className="bg-[#1F1E1F] min-w-[40vw] max-w-[60vw] p-4 rounded-md">
+      <div className="bg-[#1F1E1F] min-w-[10vw] max-w-[60vw] p-4 rounded-md">
         <ReactMarkdown
           className="message__markdown text-left"
           children={message.text}
