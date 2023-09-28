@@ -1,7 +1,7 @@
 import { Message } from "~/components/chat/ChatMessage"; // Import Message type from ChatMessage
 
 const UserChat: React.FC<{ message: Message }> = ({ message }) => {
-  console.log("usaer", message);
+
   return (
     <>
       <div className="flex my-2  gap-2 justify-end">

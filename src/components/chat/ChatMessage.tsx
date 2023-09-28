@@ -17,20 +17,19 @@ export interface Message {
   createdAt: number;
   text: string;
   ai: boolean;
-  
 }
-const ChatMessage : React.FC = () => {
-  const messages:[Message] = useSelector((state:any) => state.message);
-
+const ChatMessage: React.FC = () => {
+  const messages = useSelector((state: any) => state.message.chat);
+  // console.log("messages", messages[0].id);
   return (
     <>
-      {messages.map((message) =>
-        message.ai ? (
-          <AiChat message={message} key={message.id} /> // Add a unique key prop
+      {messages.map((message: Message) => {
+        return message.ai ? (
+          <AiChat key={message.id} message={message} />
         ) : (
-          <UserChat message={message} key={message.id} /> // Add a unique key prop
-        )
-      )}
+          <UserChat key={message.id} message={message} />
+        );
+      })}
     </>
   );
 };
