@@ -5,6 +5,7 @@ import Filter from "bad-words";
 import { davinci } from "~/utils/davinci";
 import { useDispatch } from "react-redux";
 import { addMessage } from "~/redux/features/message";
+
 const ChatView: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [formValue, setFormValue] = useState("");
