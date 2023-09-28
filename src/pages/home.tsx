@@ -3,17 +3,8 @@ import { ChatContextProvider } from "~/context/chatContext";
 import ChatView from "~/components/chat/ChatView";
 
 import Headers from "~/components/Headers";
-import { useEffect, useState } from "react";
 
-const Home = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    const apiKey = window.localStorage.getItem("api-key");
-    if (!apiKey) {
-      setModalOpen(true);
-    }
-  }, []);
+const Home: React.FC = () => {
   return (
     <ChatContextProvider>
       <Headers />
