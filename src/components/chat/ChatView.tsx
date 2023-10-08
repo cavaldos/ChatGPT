@@ -6,7 +6,7 @@ import { davinci } from "~/utils/davinci";
 import { useDispatch } from "react-redux";
 import { addMessage } from "~/redux/features/message";
 import { LazyThinkingMemo } from "~/components/Lazy";
-import InputLoading  from "~/components/Lazy/InputLoading";
+import InputLoading from "~/components/Lazy/InputLoading";
 const ChatView: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [checkThinking, setCheckThinking] = useState(false); // 👈 Thêm state [checkThinking
@@ -57,6 +57,15 @@ const ChatView: React.FC = () => {
       sendMessage(e);
     }
   };
+  const handleSend = (e: any) => {
+    e.preventDefault();
+    if (textareaRef.current) {
+      textareaRef.current.value = "";
+      setFormValue("");
+    }
+    dispatch(addMessage({ text: formValue, createdAt: Date.now(), ai: false }));
+    sendMessage(e);
+  };
 
   useEffect(() => {
     textareaRef.current?.focus();
@@ -77,7 +86,11 @@ const ChatView: React.FC = () => {
           onKeyDown={handleKeyDown}
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button type="submit" className="chatview__btn-send">
+        <button
+          type="submit"
+          className="chatview__btn-send"
+          onClick={handleSend}
+        >
           <FaPaperPlane className="mx-5 hover:text-[#eee]" size={30} />
         </button>
       </div>
